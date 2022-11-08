@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true);
   return (
     <div className="navbar bg-base-100 px-10">
       <div className="navbar-start">
@@ -38,6 +38,11 @@ const Navbar = () => {
                 <li>
                   <Link to="/service/myservice" className="justify-between">
                     My services
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/service/addservice" className="justify-between">
+                    Add service
                   </Link>
                 </li>
                 <li>
@@ -90,6 +95,11 @@ const Navbar = () => {
               <li>
                 <Link to="/service/myservice" className="justify-between">
                   My services
+                </Link>
+              </li>
+              <li>
+                <Link to="/service/addservice" className="justify-between">
+                  Add service
                 </Link>
               </li>
               <li>
