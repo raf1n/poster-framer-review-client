@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col items-center justify-between p-6 bg-white dark:bg-gray-900 sm:flex-row">
+    <footer className="flex flex-col items-center justify-between p-6 bg-white bg-gray-900 sm:flex-row">
       <Link
         to="/"
         className="text-xl font-bold text-gray-600 transition-colors duration-300 dark:text-white hover:text-gray-700 dark:hover:text-gray-300"
@@ -11,11 +11,11 @@ const Footer = () => {
         Poster Framer
       </Link>
 
-      <p className="text-sm text-gray-600 dark:text-gray-300">
+      <p className="text-sm text-gray-400 dark:text-gray-300 mt-2">
         © Copyright 2022. All Rights Reserved by RAFIN.
       </p>
 
-      <div className="flex -mx-2">
+      <div className="flex -mx-2 mt-2">
         <a
           href="https://reddit.com"
           className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"

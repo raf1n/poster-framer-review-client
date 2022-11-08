@@ -4,6 +4,7 @@ import Feature from "../../components/Feature/Feature";
 import ServiceCards from "../../components/ServiceCards/ServiceCards";
 import Status from "../../components/Status/Status";
 import { useTitle } from "react-use";
+import { Link } from "react-router-dom";
 const Home = () => {
   const HandleTitle = () => {
     useTitle("PF || Home");
@@ -30,6 +31,14 @@ const Home = () => {
           {services.map((service) => (
             <ServiceCards key={service._id} service={service}></ServiceCards>
           ))}
+        </div>
+
+        <div className="flex">
+          <Link to="/services" className="mx-auto">
+            <button className="px-10 py-3 mt-6 text-md font-medium tracking-wide text-white text-md font-bold capitalize bg-cyan-700 rounded-md hover:bg-cyan-900">
+              See All
+            </button>
+          </Link>
         </div>
       </div>
       <Status></Status>
