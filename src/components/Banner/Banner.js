@@ -51,7 +51,7 @@ const Banner = () => {
                 />
               </svg>
 
-              <span className="mx-3">Sustainable concept</span>
+              <span className="mx-3">Customizable Service</span>
             </div>
 
             <div className="flex items-center text-gray-800 -px-3 dark:text-gray-700">
@@ -127,7 +127,7 @@ const Banner = () => {
                 />
               </svg>
 
-              <span className="mx-3">Delivery Across the Country</span>
+              <span className="mx-3">Budget Friendly</span>
             </div>
           </div>
         </div>
