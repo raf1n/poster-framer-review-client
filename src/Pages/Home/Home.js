@@ -3,8 +3,13 @@ import Banner from "../../components/Banner/Banner";
 import Feature from "../../components/Feature/Feature";
 import ServiceCards from "../../components/ServiceCards/ServiceCards";
 import Status from "../../components/Status/Status";
-
+import { useTitle } from "react-use";
 const Home = () => {
+  const HandleTitle = () => {
+    useTitle("PF || Home");
+    return null;
+  };
+  HandleTitle();
   const [services, setServices] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/services")

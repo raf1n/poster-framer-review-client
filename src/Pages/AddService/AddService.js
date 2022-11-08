@@ -1,7 +1,12 @@
 import React from "react";
 import toast from "react-hot-toast";
-
+import { useTitle } from "react-use";
 const AddService = () => {
+  const HandleTitle = () => {
+    useTitle("PF || Add Service");
+    return null;
+  };
+  HandleTitle();
   const handleAddService = (e) => {
     e.preventDefault();
     const service = {

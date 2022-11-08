@@ -36,11 +36,6 @@ const Navbar = () => {
                   <Link to="/services">Services</Link>
                 </li>
                 <li>
-                  <Link to="/service/myservice" className="justify-between">
-                    My services
-                  </Link>
-                </li>
-                <li>
                   <Link to="/service/addservice" className="justify-between">
                     Add service
                   </Link>
@@ -91,11 +86,6 @@ const Navbar = () => {
               </li>
               <li tabIndex={0}>
                 <Link to="/services">Services</Link>
-              </li>
-              <li>
-                <Link to="/service/myservice" className="justify-between">
-                  My services
-                </Link>
               </li>
               <li>
                 <Link to="/service/addservice" className="justify-between">

@@ -24,8 +24,8 @@ const ServiceCards = ({ service }) => {
         </div>
         <div className="card-actions justify-center">
           <Link to={`/service/${_id}`}>
-            <button className="btn btn-wide btn-outline btn-accent">
-              View Details
+            <button className="btn btn-wide btn-outline btn-accent glass">
+              <span className="text-cyan-900">View Details</span>
             </button>
           </Link>
         </div>

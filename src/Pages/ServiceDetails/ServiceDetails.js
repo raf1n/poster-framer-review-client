@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { useTitle } from "react-use";
 const ServiceDetails = () => {
+  const HandleTitle = () => {
+    useTitle("PF || Service Details");
+    return null;
+  };
+  HandleTitle();
   const { id } = useParams();
   console.log(id);
   const [service, setService] = useState({});
