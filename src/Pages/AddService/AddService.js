@@ -10,7 +10,6 @@ const AddService = () => {
       price: e.target.price.value,
       description: e.target.description.value,
     };
-    console.log(service);
     fetch("http://localhost:5000/service/add-service", {
       method: "POST",
       headers: {
@@ -25,6 +24,7 @@ const AddService = () => {
             duration: 4000,
           });
         }
+        e.target.reset();
       });
   };
   return (
@@ -44,11 +44,10 @@ const AddService = () => {
           </div>
 
           <div className="mt-8 lg:w-1/2 lg:mx-6">
-            <div className="w-full px-8 py-10 mx-auto overflow-hidden bg-white rounded-lg shadow-2xl  lg:max-w-xl shadow-gray-300/50 ">
+            <div className="w-full px-8 py-10 mx-auto overflow-hidden bg-white rounded-lg shadow-xl mb-6 lg:max-w-xl shadow-gray-300/50 ">
               <h1 className="text-lg font-medium text-gray-700">
                 Fill up with necessary information
               </h1>
-
               <form onSubmit={handleAddService} className="mt-6">
                 <div className="flex-1">
                   <label className="block mb-2 text-sm text-gray-800">
@@ -93,8 +92,7 @@ const AddService = () => {
                     placeholder="Message"
                   ></textarea>
                 </div>
-
-                <button className="w-full px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-cyan-700 rounded-md hover:bg-cyan-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                <button className="w-full px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize  bg-cyan-700 rounded-md hover:bg-cyan-900">
                   Add service
                 </button>
               </form>
