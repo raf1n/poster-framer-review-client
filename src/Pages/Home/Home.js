@@ -16,9 +16,9 @@ const Home = () => {
       <Banner></Banner>
       <div className="flex justify-center flex-col">
         <div>
-          <h1 class="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl mb-10">
+          <h1 className="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl mb-10">
             explore my <br /> awesome{" "}
-            <span class="text-cyan-700">Services</span>
+            <span className="text-cyan-700">Services</span>
           </h1>
         </div>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 md:grid-cols-2 mx-auto">

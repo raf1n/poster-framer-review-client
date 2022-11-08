@@ -24,7 +24,7 @@ const ServiceCards = ({ service }) => {
           </p>
         </div>
         <div className="card-actions justify-center">
-          <Link>
+          <Link to={`/service/${_id}`}>
             <button className="btn btn-wide btn-outline btn-accent">
               View Details
             </button>
