@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ServiceCards from "../../components/ServiceCards/ServiceCards";
 import { useTitle } from "react-use";
-import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
+
 import Spinner from "../../components/Spinner/Spinner";
 const Services = () => {
   const HandleTitle = () => {
@@ -9,7 +9,6 @@ const Services = () => {
     return null;
   };
   HandleTitle();
-  //   const { setLoading, loading } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [services, setServices] = useState([]);
   useEffect(() => {

@@ -10,7 +10,6 @@ const ServiceDetails = () => {
   };
   HandleTitle();
   const { id } = useParams();
-  console.log(id);
   const [service, setService] = useState({});
   useEffect(() => {
     fetch(`http://localhost:5000/service/${id}`)
@@ -21,11 +20,10 @@ const ServiceDetails = () => {
         }
       });
   }, [id]);
-  console.log(service);
   return (
     <div>
       <ServiceDetail key={service._id} service={service}></ServiceDetail>
-      <Reviews key={service._id} service={service}></Reviews>
+      <Reviews key={0} service={service}></Reviews>
     </div>
   );
 };

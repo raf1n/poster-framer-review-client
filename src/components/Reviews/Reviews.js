@@ -1,59 +1,92 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const Reviews = ({ service }) => {
+  const [refresh, setRefresh] = useState(false);
   const { _id } = service;
   const { user } = useContext(AuthContext);
+  const [reviews, setReviews] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/review?s_id=${_id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data.data);
+      });
+  }, [_id, refresh]);
 
   const handleAddReview = (e) => {
     e.preventDefault();
     const review = {
       s_id: _id,
+      r_name: user?.displayName,
       r_email: user?.email,
+      r_img: user?.photoURL,
       review: e.target.review.value,
     };
     console.log(review);
-    // fetch("", {
-    //   method: "POST",
-    // });
-    console.log(e);
+    fetch("http://localhost:5000/add-review", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(review),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setRefresh(!refresh);
+          toast.success(`${data.message}`, {
+            duration: 4000,
+          });
+        } else {
+          toast.success(`${data.error}`, {
+            duration: 4000,
+          });
+        }
+        e.target.reset();
+      });
   };
 
   return (
     <div className="container px-16 mx-auto p-4 text-gray-800">
       <h2 className="mb-4 text-2xl font-semibold leading-tight">Reviews</h2>
+
       <div className="overflow-x-auto">
         <table className="w-full p-6 text-xs text-left whitespace-nowrap">
           <thead>
             <tr className="bg-gray-300">
               <th className="p-3">Name</th>
-              <th className="p-3">Text</th>
+              <th className="p-3">Review</th>
               <th className="p-3">Date</th>
             </tr>
           </thead>
-          <tbody className="border-b bg-gray-50 border-gray-300">
-            <tr>
-              <td className="px-3 py-2 flex items-center gap-2">
-                <div className="avatar">
-                  <div className="w-10 mask mask-squircle">
-                    <img src="https://placeimg.com/192/192/people" alt="" />
+          {reviews.map((review) => (
+            <tbody
+              key={review._id}
+              className="border-b bg-gray-50 border-gray-300"
+            >
+              <tr>
+                <td className="px-3 py-2 flex items-center gap-2">
+                  <div className="avatar">
+                    <div className="w-10 mask mask-squircle">
+                      <img src={review?.r_img} alt="" />
+                    </div>
                   </div>
-                </div>
-                <p>Dwight Adams</p>
-              </td>
-              <td className="px-3 py-2">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Quaerat, voluptatum?
-                </p>
-              </td>
-              <td className="px-3 py-2">
-                <p>12.12.12</p>
-              </td>
-            </tr>
-          </tbody>
+                  <p>{review?.r_name}</p>
+                </td>
+                <td className="px-3 py-2">
+                  <p>{review?.review}</p>
+                </td>
+                <td className="px-3 py-2">
+                  <p>{review?.date}</p>
+                </td>
+              </tr>
+            </tbody>
+          ))}
         </table>
       </div>
+
       <form onSubmit={handleAddReview} className="mt-6 p-6">
         <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-center">
           <div className="avatar">
