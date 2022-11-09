@@ -47,7 +47,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/review/myreview" className="justify-between">
+                  <Link to="/myreview" className="justify-between">
                     My review
                   </Link>
                 </li>
@@ -99,7 +99,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/review/myreview" className="justify-between">
+                <Link to="/myreview" className="justify-between">
                   My review
                 </Link>
               </li>

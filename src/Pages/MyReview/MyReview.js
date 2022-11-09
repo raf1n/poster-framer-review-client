@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const MyReview = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [review, setReview] = useState([]);
   const [refresh, setRefresh] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:5000/review/myreview?email=${user?.email}`)
+    fetch(`http://localhost:5000/myreview?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setReview(data.data);
@@ -27,6 +29,9 @@ const MyReview = () => {
         }
       })
       .catch((err) => toast.error(err.message));
+  };
+  const handleEdit = (id) => {
+    navigate(`/review/edit-review/${id}`);
   };
   return (
     <div className="container p-2 mb-[12.9rem] mt-12 mx-auto sm:p-4 text-gray-800">
@@ -68,7 +73,12 @@ const MyReview = () => {
                       >
                         delete
                       </button>
-                      <button className="btn btn-xs">edit</button>
+                      <button
+                        onClick={() => handleEdit(mr._id)}
+                        className="btn btn-xs"
+                      >
+                        edit
+                      </button>
                     </div>
                   </span>
                 </td>

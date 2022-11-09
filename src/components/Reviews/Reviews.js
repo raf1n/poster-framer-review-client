@@ -80,7 +80,7 @@ const Reviews = ({ service }) => {
                   <p>{review?.review}</p>
                 </td>
                 <td className="px-3 py-2">
-                  <p>{review?.date}</p>
+                  <p>{review?.date.slice(0, 19)}</p>
                 </td>
               </tr>
             </tbody>
