@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 
 const Navbar = () => {
-  const [user, setUser] = useState(true);
+  const { user } = useContext(AuthContext);
   return (
     <div className="navbar bg-base-100 px-10">
       <div className="navbar-start">
@@ -41,8 +42,8 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/reviews/addreview" className="justify-between">
-                    Add review
+                  <Link to="/reviews/myreview" className="justify-between">
+                    My review
                   </Link>
                 </li>
                 <li>
@@ -93,8 +94,8 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/reviews/addreview" className="justify-between">
-                  Add review
+                <Link to="/reviews/myreview" className="justify-between">
+                  My review
                 </Link>
               </li>
               <li>
@@ -117,31 +118,6 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        {/* <>
-          {(user && user?.email) || (user && user?.uid) ? (
-            <>
-              <div
-                className="avatar tooltip tooltip-left"
-                data-tip={user?.displayName}
-              >
-                <div className="w-8 mr-2 lg:w-10 rounded-full">
-                  {user?.photoURL ? (
-                    <img src={user?.photoURL} alt="avatar" />
-                  ) : (
-                    <FaUser className="w-6 lg:w-8 mt-2 ml-1 h-6"></FaUser>
-                  )}
-                </div>
-              </div>
-              <Link onClick={handleLogOut} className="btn btn-sm">
-                Log Out
-              </Link>
-            </>
-          ) : (
-            <Link to="/login" className="btn btn-sm ml-3">
-              Login
-            </Link>
-          )}
-        </> */}
         {user ? (
           <Link className="btn btn-sm">Log Out</Link>
         ) : (

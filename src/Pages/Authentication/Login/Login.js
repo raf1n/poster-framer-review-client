@@ -10,9 +10,9 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
   const [error, setError] = useState("");
   return (
-    <section className="mt-4 mb-4">
+    <section className="mt-6 mb-4">
       <div className="flex w-[90%] lg:w-full  max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-xl">
-        <div className="w-full px-6 mt-5 py-4 md:px-8 h-[34em] lg:w-full">
+        <div className="w-full px-6 mt-5 py-4 md:px-8 h-[36em] lg:w-full">
           <h2 className="text-2xl font-semibold text-center text-gray-700 ">
             Poster Framer
           </h2>
@@ -111,7 +111,7 @@ const Login = () => {
 
             <div to="/login" className="text-xs text-gray-500">
               Not registered Yet? then{" "}
-              <Link to="/registration">
+              <Link to="/register">
                 <span className="font-semibold uppercase hover:underline">
                   sign up
                 </span>

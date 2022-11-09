@@ -62,7 +62,7 @@ const Register = () => {
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/5 border-b  lg:w-1/4"></span>
             <Link
-              to="/registration"
+              to="/register"
               className="text-xs text-center text-gray-500 uppercase hover:underline"
             >
               or sign up with email
