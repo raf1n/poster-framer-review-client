@@ -4,7 +4,7 @@ import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const Reviews = ({ service }) => {
   const [refresh, setRefresh] = useState(false);
-  const { _id } = service;
+  const { _id, name } = service;
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
@@ -19,6 +19,7 @@ const Reviews = ({ service }) => {
     e.preventDefault();
     const review = {
       s_id: _id,
+      s_name: name,
       r_name: user?.displayName,
       r_email: user?.email,
       r_img: user?.photoURL,

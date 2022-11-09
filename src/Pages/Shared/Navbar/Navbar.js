@@ -47,7 +47,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/myreview" className="justify-between">
+                  <Link to="/review/myreview" className="justify-between">
                     My review
                   </Link>
                 </li>
@@ -99,7 +99,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/myreview" className="justify-between">
+                <Link to="/review/myreview" className="justify-between">
                   My review
                 </Link>
               </li>
@@ -124,11 +124,11 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <Link onClick={handleLogOut} className="btn btn-sm">
+          <Link onClick={handleLogOut} className="btn btn-xs md:btn-sm">
             Log Out
           </Link>
         ) : (
-          <Link to="/login" className="btn btn-sm ml-3">
+          <Link to="/login" className="btn btn-xs md:btn-sm">
             Login
           </Link>
         )}

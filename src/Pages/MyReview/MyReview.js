@@ -1,14 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useToaster } from "react-hot-toast";
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const MyReview = () => {
-  const [myReview, setMyreview] = useState([]);
-  useEffect(() => {}, []);
+  const { user } = useContext(AuthContext);
+  const [review, setReview] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/review/myreview?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReview(data.data);
+      });
+  }, [user?.email]);
+  const handleDetete = (id) => {};
   return (
     <div className="container p-2 mb-[12.9rem] mt-12 mx-auto sm:p-4 text-gray-800">
-      <h2 className="mb-4 text-3xl font-semibold leading-tight">My Reviews</h2>
-      <div className="overflow-x-auto min-h-full">
-        <table className="min-w-full text-xs">
+      <h2 className="mb-4 text-3xl text-center font-semibold leading-tight">
+        My Reviews
+      </h2>
+      <div className="overflow-x-auto min-h-full lg:w-[90%] mx-auto">
+        <table className="min-w-full text-xs w-[40%]">
           <thead className="bg-gray-300">
             <tr className="text-left">
               <th className="p-3">Service</th>
@@ -18,30 +28,36 @@ const MyReview = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-              <td className="p-3">
-                <p>97412378923</p>
-              </td>
-              <td className="p-3">
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Accusantium praesentium corrupti maxime debitis repellat?
-                  Nulla dolor ut ducimus fugiat corporis!
-                </p>
-              </td>
-              <td className="p-3">
-                <p>14 Jan 2022</p>
-                <p className="text-gray-600">Friday</p>
-              </td>
-              <td className="p-3 text-right">
-                <span className="px-3 py-1 font-semibold rounded-md text-gray-50">
-                  <div className="flex">
-                    <button className="btn btn-xs mr-2">delete</button>
-                    <button className="btn btn-xs">edit</button>
-                  </div>
-                </span>
-              </td>
-            </tr>
+            {review.map((mr) => (
+              <tr
+                key={mr._id}
+                className="border-b w-6 border-opacity-20 border-gray-300 bg-gray-50"
+              >
+                <td className="p-3">
+                  <p>{mr.s_name}</p>
+                </td>
+                <td className="p-3 ">
+                  <p>{mr.review}</p>
+                </td>
+                <td className="p-3">
+                  <p>{mr.date.slice(0, 19)}</p>
+                  <p className="text-gray-600">Friday</p>
+                </td>
+                <td className="p-3 text-right">
+                  <span className="px-3 py-1 font-semibold rounded-md text-gray-50">
+                    <div className="flex">
+                      <button
+                        onClick={() => handleDetete(mr._id)}
+                        className="btn btn-xs mr-2"
+                      >
+                        delete
+                      </button>
+                      <button className="btn btn-xs">edit</button>
+                    </div>
+                  </span>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
