@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const MyReview = () => {
@@ -9,18 +9,21 @@ const MyReview = () => {
   const [review, setReview] = useState([]);
   const [refresh, setRefresh] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:5000/myreview?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("PF-token")}`,
-      },
-    })
+    fetch(
+      `https://poster-framer-server.vercel.app/myreview?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("PF-token")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setReview(data.data);
       });
   }, [user?.email, refresh]);
   const handleDetete = (id) => {
-    fetch(`http://localhost:5000/review/${id}`, {
+    fetch(`https://poster-framer-server.vercel.app/review/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${localStorage.getItem("PF-token")}`,
@@ -40,7 +43,18 @@ const MyReview = () => {
   const handleEdit = (id) => {
     navigate(`/review/edit-review/${id}`);
   };
-  return (
+  return review.length === 0 ? (
+    <div className="p-20 flex justify-center text-2xl">
+      <div>
+        You haven't Reviewed anything
+        <br /> Please{" "}
+        <span className="text-semibold text-3xl text-red-500">
+          <Link to="/services">Post</Link>
+        </span>{" "}
+        Review
+      </div>
+    </div>
+  ) : (
     <div className="container p-2 mb-[12.9rem] mt-12 mx-auto sm:p-4 text-gray-800">
       <h2 className="mb-4 text-3xl text-center font-semibold leading-tight">
         My Reviews
@@ -56,7 +70,7 @@ const MyReview = () => {
             </tr>
           </thead>
           <tbody>
-            {review.map((mr) => (
+            {review?.map((mr) => (
               <tr
                 key={mr._id}
                 className="border-b w-6 border-opacity-20 border-gray-300 bg-gray-50"

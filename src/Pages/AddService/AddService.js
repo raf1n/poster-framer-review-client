@@ -15,7 +15,7 @@ const AddService = () => {
       price: e.target.price.value,
       description: e.target.description.value,
     };
-    fetch("http://localhost:5000/service/add-service", {
+    fetch("https://poster-framer-server.vercel.app/service/add-service", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -12,7 +12,7 @@ const ServiceDetails = () => {
   const { id } = useParams();
   const [service, setService] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:5000/service/${id}`)
+    fetch(`https://poster-framer-server.vercel.app/service/${id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

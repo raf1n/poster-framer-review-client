@@ -7,7 +7,7 @@ const EditReview = () => {
   const { id } = useParams();
   const [review, setReview] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews/${id}`, {
+    fetch(`https://poster-framer-server.vercel.app/reviews/${id}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("PF-token")}`,
       },
@@ -28,7 +28,7 @@ const EditReview = () => {
     review.review = e.target.review.value;
     console.log(review);
 
-    fetch(`http://localhost:5000/edit-review/${id}`, {
+    fetch(`https://poster-framer-server.vercel.app/edit-review/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

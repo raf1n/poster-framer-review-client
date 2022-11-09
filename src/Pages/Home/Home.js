@@ -13,7 +13,11 @@ const Home = () => {
   HandleTitle();
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/services")
+    fetch("https://poster-framer-server.vercel.app/services", {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("PF-token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => setServices(data.data.servicesWithLimit));
   }, []);

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const Reviews = ({ service }) => {
@@ -8,7 +9,11 @@ const Reviews = ({ service }) => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/review?s_id=${_id}`)
+    fetch(`https://poster-framer-server.vercel.app/review?s_id=${_id}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("PF-token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setReviews(data.data);
@@ -26,7 +31,7 @@ const Reviews = ({ service }) => {
       review: e.target.review.value,
     };
     console.log(review);
-    fetch("http://localhost:5000/add-review", {
+    fetch("https://poster-framer-server.vercel.app/add-review", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -50,7 +55,17 @@ const Reviews = ({ service }) => {
       });
   };
 
-  return (
+  return !user && !user?.email ? (
+    <div className="p-20 flex justify-center text-2xl">
+      <div>
+        Please{" "}
+        <span className="text-semibold text-red-500">
+          <Link to="/login">LOGIN</Link>
+        </span>{" "}
+        to Add A review
+      </div>
+    </div>
+  ) : (
     <div className="container px-16 mx-auto p-4 text-gray-800">
       <h2 className="mb-4 text-2xl font-semibold leading-tight">Reviews</h2>
 
@@ -63,7 +78,7 @@ const Reviews = ({ service }) => {
               <th className="p-3">Date</th>
             </tr>
           </thead>
-          {reviews.map((review) => (
+          {reviews?.map((review) => (
             <tbody
               key={review._id}
               className="border-b bg-gray-50 border-gray-300"
