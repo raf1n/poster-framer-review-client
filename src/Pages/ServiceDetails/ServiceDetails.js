@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTitle } from "react-use";
+import Reviews from "../../components/Reviews/Reviews";
 import ServiceDetail from "../../components/ServiceDetail/ServiceDetail";
 const ServiceDetails = () => {
   const HandleTitle = () => {
@@ -24,7 +25,7 @@ const ServiceDetails = () => {
   return (
     <div>
       <ServiceDetail key={service._id} service={service}></ServiceDetail>
-      <h2>Review</h2>
+      <Reviews></Reviews>
     </div>
   );
 };
