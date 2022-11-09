@@ -1,6 +1,11 @@
 import React from "react";
-
+import { useTitle } from "react-use";
 const Blog = () => {
+  const HandleTitle = () => {
+    useTitle("PF || Blogs");
+    return null;
+  };
+  HandleTitle();
   return (
     <section className="text-gray-800">
       <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">

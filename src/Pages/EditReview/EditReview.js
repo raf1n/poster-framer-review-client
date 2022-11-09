@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { useTitle } from "react-use";
 const EditReview = () => {
+  const HandleTitle = () => {
+    useTitle("PF || Update Review");
+    return null;
+  };
+  HandleTitle();
   const navigate = useNavigate();
   const { id } = useParams();
   const [review, setReview] = useState({});

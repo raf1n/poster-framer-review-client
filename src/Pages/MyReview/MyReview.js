@@ -2,8 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
-
+import { useTitle } from "react-use";
 const MyReview = () => {
+  const HandleTitle = () => {
+    useTitle("PF || My Reviews");
+    return null;
+  };
+  HandleTitle();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [review, setReview] = useState([]);
