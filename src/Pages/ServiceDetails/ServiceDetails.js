@@ -25,7 +25,7 @@ const ServiceDetails = () => {
   return (
     <div>
       <ServiceDetail key={service._id} service={service}></ServiceDetail>
-      <Reviews></Reviews>
+      <Reviews key={service._id} service={service}></Reviews>
     </div>
   );
 };

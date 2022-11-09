@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
-const Reviews = () => {
+const Reviews = ({ service }) => {
+  const { _id } = service;
+  const { user } = useContext(AuthContext);
+
+  const handleAddReview = (e) => {
+    e.preventDefault();
+    const review = {
+      s_id: _id,
+      r_email: user?.email,
+      review: e.target.review.value,
+    };
+    console.log(review);
+    // fetch("", {
+    //   method: "POST",
+    // });
+    console.log(e);
+  };
+
   return (
     <div className="container px-16 mx-auto p-4 text-gray-800">
       <h2 className="mb-4 text-2xl font-semibold leading-tight">Reviews</h2>
@@ -36,16 +54,16 @@ const Reviews = () => {
           </tbody>
         </table>
       </div>
-      <div className="mt-6 p-6">
+      <form onSubmit={handleAddReview} className="mt-6 p-6">
         <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-center">
           <div className="avatar">
             <div className="w-10 mask ">
-              <img src="https://placeimg.com/192/192/people" alt="" />
+              <img src={user?.photoURL} alt="" />
             </div>
           </div>
           <div className="grow">
             <label className="mb-2 lg:ml-2 text-sm text-gray-800">
-              Rahim Uddin
+              {user?.displayName}
             </label>
             <textarea
               name="review"
@@ -60,7 +78,7 @@ const Reviews = () => {
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

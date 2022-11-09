@@ -3,12 +3,48 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
-  const { user, setUser, loading, setLoading, login, googleLogin } =
+  const { user, setUser, setLoading, login, googleLogin } =
     useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
   const [error, setError] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    login(email, password)
+      .then((result) => {
+        const user = result.user;
+        setError("");
+        if (user) {
+          navigate(from, { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        setError("");
+        if (user) {
+          navigate(from, { replace: true });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err.message);
+      });
+  };
   return (
     <section className="mt-6 mb-4">
       <div className="flex w-[90%] lg:w-full  max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-xl">
@@ -18,7 +54,7 @@ const Login = () => {
           </h2>
           <p className="text-xl text-center text-gray-600 ">Welcome !</p>
           <Link
-            // onClick={handleGoogleSignIn}
+            onClick={handleGoogleLogin}
             className="flex items-center justify-center mt-3 text-gray-600 transition-colors duration-300 transform border rounded-lg hover:bg-gray-50 "
           >
             <div className="px-4 py-2">
@@ -57,7 +93,7 @@ const Login = () => {
 
             <span className="w-1/5 border-b  lg:w-1/4"></span>
           </div>
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="mt-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-600 "
