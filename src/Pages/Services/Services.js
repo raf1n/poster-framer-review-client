@@ -1,18 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ServiceCards from "../../components/ServiceCards/ServiceCards";
 import { useTitle } from "react-use";
+import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 const Services = () => {
   const HandleTitle = () => {
     useTitle("PF || Services");
     return null;
   };
   HandleTitle();
+  const { setLoading } = useContext(AuthContext);
   const [services, setServices] = useState([]);
   useEffect(() => {
+    setLoading(true);
     fetch("http://localhost:5000/services")
       .then((res) => res.json())
-      .then((data) => setServices(data.data.services));
-  }, []);
+      .then((data) => {
+        if (data.success) {
+          setServices(data.data.services);
+          setLoading(false);
+        }
+      });
+  }, [setLoading]);
   return (
     <div className="flex justify-center flex-col my-10">
       <div>
