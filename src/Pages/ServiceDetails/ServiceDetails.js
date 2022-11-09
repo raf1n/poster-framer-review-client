@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTitle } from "react-use";
+import ServiceDetail from "../../components/ServiceDetail/ServiceDetail";
 const ServiceDetails = () => {
   const HandleTitle = () => {
     useTitle("PF || Service Details");
@@ -22,7 +23,7 @@ const ServiceDetails = () => {
   console.log(service);
   return (
     <div>
-      <h1>Service Detail</h1>
+      <ServiceDetail key={service._id} service={service}></ServiceDetail>
       <h2>Review</h2>
     </div>
   );
