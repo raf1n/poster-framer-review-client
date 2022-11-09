@@ -1,22 +1,67 @@
 import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
-  const {
-    user,
-    setUser,
-    loading,
-    setLoading,
-    createUser,
-    login,
-    googleLogin,
-    userProfileUpdate,
-  } = useContext(AuthContext);
+  const { setUser, createUser, googleLogin, userProfileUpdate } =
+    useContext(AuthContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const imageURL = form.imageURL.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setError("");
+        updateUserProfile(name, imageURL);
+        setUser(result.user);
+        toast.success("Your account have been created Successfully!", {
+          duration: 4000,
+          position: "top-center",
+        });
+        form.reset();
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err.message);
+      });
+  };
+  const updateUserProfile = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    userProfileUpdate(profile)
+      .then(() => {})
+      .catch((err) => {
+        setError(err.message);
+      });
+  };
+  const handleGoogleSignIn = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setError("");
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err.message);
+      });
+  };
   return (
     <section className="mt-2 mb-4">
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-5xl">
@@ -32,7 +77,7 @@ const Register = () => {
           <p className="text-3xl text-center text-gray-600 ">Welcome !</p>
 
           <Link
-            // onClick={handleGoogleSignIn}
+            onClick={handleGoogleSignIn}
             className="flex items-center justify-center mt-3 text-gray-600 transition-colors duration-300 transform border rounded-lg hover:bg-gray-50 "
           >
             <div className="px-4 py-2">
@@ -70,7 +115,7 @@ const Register = () => {
             <span className="w-1/5 border-b  lg:w-1/4"></span>
           </div>
 
-          <form>
+          <form onSubmit={handleRegister}>
             <div className="mt-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-600 "

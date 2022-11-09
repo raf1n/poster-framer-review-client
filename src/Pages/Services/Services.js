@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import ServiceCards from "../../components/ServiceCards/ServiceCards";
 import { useTitle } from "react-use";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
+import Spinner from "../../components/Spinner/Spinner";
 const Services = () => {
   const HandleTitle = () => {
     useTitle("PF || Services");
     return null;
   };
   HandleTitle();
-  const { setLoading } = useContext(AuthContext);
+  //   const { setLoading, loading } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
   const [services, setServices] = useState([]);
   useEffect(() => {
     setLoading(true);
@@ -29,11 +31,17 @@ const Services = () => {
           <span className="text-cyan-700">Services</span>
         </h1>
       </div>
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 md:grid-cols-2 mx-auto">
-        {services.map((service) => (
-          <ServiceCards key={service._id} service={service}></ServiceCards>
-        ))}
-      </div>
+      {loading ? (
+        <div className="flex justify-center">
+          <Spinner></Spinner>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 md:grid-cols-2 mx-auto">
+          {services.map((service) => (
+            <ServiceCards key={service._id} service={service}></ServiceCards>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
