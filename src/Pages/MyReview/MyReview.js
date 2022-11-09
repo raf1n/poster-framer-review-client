@@ -1,17 +1,33 @@
 import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const MyReview = () => {
   const { user } = useContext(AuthContext);
   const [review, setReview] = useState([]);
+  const [refresh, setRefresh] = useState(false);
   useEffect(() => {
     fetch(`http://localhost:5000/review/myreview?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setReview(data.data);
       });
-  }, [user?.email]);
-  const handleDetete = (id) => {};
+  }, [user?.email, refresh]);
+  const handleDetete = (id) => {
+    fetch(`http://localhost:5000/review/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success(data.message);
+          setRefresh(!refresh);
+        } else {
+          toast.error(data.error);
+        }
+      })
+      .catch((err) => toast.error(err.message));
+  };
   return (
     <div className="container p-2 mb-[12.9rem] mt-12 mx-auto sm:p-4 text-gray-800">
       <h2 className="mb-4 text-3xl text-center font-semibold leading-tight">
