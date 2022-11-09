@@ -9,7 +9,11 @@ const MyReview = () => {
   const [review, setReview] = useState([]);
   const [refresh, setRefresh] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:5000/myreview?email=${user?.email}`)
+    fetch(`http://localhost:5000/myreview?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("PF-token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setReview(data.data);
@@ -18,6 +22,9 @@ const MyReview = () => {
   const handleDetete = (id) => {
     fetch(`http://localhost:5000/review/${id}`, {
       method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("PF-token")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {

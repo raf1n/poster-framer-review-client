@@ -37,7 +37,7 @@ const AuthProvider = ({ children }) => {
     return updateProfile(auth.currentUser, profile);
   };
   const logOut = () => {
-    // localStorage.removeItem("PF-token");
+    localStorage.removeItem("PF-token");
     return signOut(auth);
   };
   useEffect(() => {

@@ -7,7 +7,11 @@ const EditReview = () => {
   const { id } = useParams();
   const [review, setReview] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews/${id}`)
+    fetch(`http://localhost:5000/reviews/${id}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("PF-token")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -28,6 +32,7 @@ const EditReview = () => {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("PF-token")}`,
       },
       body: JSON.stringify(review),
     })
