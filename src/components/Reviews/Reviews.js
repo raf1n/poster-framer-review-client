@@ -55,17 +55,7 @@ const Reviews = ({ service }) => {
       });
   };
 
-  return !user && !user?.email ? (
-    <div className="p-20 flex justify-center text-2xl">
-      <div>
-        Please{" "}
-        <span className="text-semibold text-red-500">
-          <Link to="/login">LOGIN</Link>
-        </span>{" "}
-        to Add A review
-      </div>
-    </div>
-  ) : (
+  return (
     <div className="container px-16 mx-auto p-4 text-gray-800">
       <h2 className="mb-4 text-2xl font-semibold leading-tight">Reviews</h2>
 
@@ -104,31 +94,43 @@ const Reviews = ({ service }) => {
         </table>
       </div>
 
-      <form onSubmit={handleAddReview} className="mt-6 p-6">
-        <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-center">
-          <div className="avatar">
-            <div className="w-10 mask ">
-              <img src={user?.photoURL} alt="" />
+      {user && user?.email ? (
+        <form onSubmit={handleAddReview} className="mt-6 p-6">
+          <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-center">
+            <div className="avatar">
+              <div className="w-10 mask ">
+                <img src={user?.photoURL} alt="" />
+              </div>
+            </div>
+            <div className="grow">
+              <label className="mb-2 lg:ml-2 text-sm text-gray-800">
+                {user?.displayName}
+              </label>
+              <textarea
+                name="review"
+                type="text"
+                placeholder="Type here"
+                className="w-full px-5 py-3  mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md    focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+              />
+            </div>
+            <div>
+              <button className="px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize  bg-cyan-700 rounded-md hover:bg-cyan-900">
+                Add Review
+              </button>
             </div>
           </div>
-          <div className="grow">
-            <label className="mb-2 lg:ml-2 text-sm text-gray-800">
-              {user?.displayName}
-            </label>
-            <textarea
-              name="review"
-              type="text"
-              placeholder="Type here"
-              className="w-full px-5 py-3  mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md    focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-            />
-          </div>
+        </form>
+      ) : (
+        <div className="p-20 flex justify-center text-2xl">
           <div>
-            <button className="px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize  bg-cyan-700 rounded-md hover:bg-cyan-900">
-              Add Review
-            </button>
+            Please{" "}
+            <span className="text-semibold text-red-500">
+              <Link to="/login">LOGIN</Link>
+            </span>{" "}
+            to Add A review
           </div>
         </div>
-      </form>
+      )}
     </div>
   );
 };
