@@ -59,6 +59,7 @@ const AddService = () => {
                     Service Name
                   </label>
                   <input
+                    required
                     name="name"
                     type="text"
                     placeholder="Enter your Service Name"
@@ -70,6 +71,7 @@ const AddService = () => {
                     Image URL
                   </label>
                   <input
+                    required
                     name="imageURL"
                     type="text"
                     placeholder="Enter your Service thumbnail"
@@ -81,6 +83,7 @@ const AddService = () => {
                     Price
                   </label>
                   <input
+                    required
                     name="price"
                     type="text"
                     placeholder="Enter your Service Price"
@@ -92,6 +95,7 @@ const AddService = () => {
                     Description
                   </label>
                   <textarea
+                    required
                     name="description"
                     className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-48  focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     placeholder="Message"
