@@ -48,7 +48,7 @@ const MyReview = () => {
   const handleEdit = (id) => {
     navigate(`/review/edit-review/${id}`);
   };
-  return review.length === 0 ? (
+  return review?.length === 0 ? (
     <div className="p-20 flex justify-center text-2xl">
       <div className="text-center">
         You haven't Reviewed anything

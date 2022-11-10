@@ -30,7 +30,6 @@ const Reviews = ({ service }) => {
       r_img: user?.photoURL,
       review: e.target.review.value,
     };
-    console.log(review);
     fetch("https://poster-framer-server.vercel.app/add-review", {
       method: "POST",
       headers: {

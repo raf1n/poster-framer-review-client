@@ -130,9 +130,11 @@ const Navbar = () => {
       <div className="navbar-end">
         {user && user?.uid && user?.email ? (
           <>
-            <h1 className="text-sm mr-2">
-              Hello, <span className="text-red-700">{user?.displayName}</span>
-            </h1>
+            <div className="hidden md:block">
+              <h1 className="text-sm  mr-2">
+                Hello, <span className="text-red-700">{user?.displayName}</span>
+              </h1>
+            </div>
             <button onClick={handleLogOut} className="btn btn-xs md:btn-sm">
               Log Out
             </button>
