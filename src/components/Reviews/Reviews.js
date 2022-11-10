@@ -121,7 +121,7 @@ const Reviews = ({ service }) => {
           </div>
         </form>
       ) : (
-        <div className="p-20 flex justify-center text-2xl">
+        <div className="p-4 lg:p-20 flex justify-center text-base lg:text-2xl">
           <div>
             Please{" "}
             <span className="text-semibold text-red-500">

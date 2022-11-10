@@ -77,7 +77,10 @@ const Navbar = () => {
               className="h-6 sm:h-9"
               alt="logo"
             />
-            <button to="/" className="btn btn-ghost normal-case text-xl">
+            <button
+              to="/"
+              className="btn btn-ghost normal-case text-base lg:text-xl"
+            >
               Poster Framer
             </button>
           </Link>
@@ -124,9 +127,12 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <Link onClick={handleLogOut} className="btn btn-xs md:btn-sm">
-            Log Out
-          </Link>
+          <>
+            <h1 className="text-sm mr-0 lg:mr-2">Hello, {user?.displayName}</h1>
+            <Link onClick={handleLogOut} className="btn btn-xs md:btn-sm">
+              Log Out
+            </Link>
+          </>
         ) : (
           <Link to="/login" className="btn btn-xs md:btn-sm">
             Login

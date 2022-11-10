@@ -6,7 +6,7 @@ const Login = () => {
   const { setLoading, login, googleLogin } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || "/";
+  const from = location?.state?.from?.pathname || "/";
   const [error, setError] = useState("");
 
   const handleLogin = (e) => {
@@ -30,7 +30,6 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             localStorage.setItem("PF-token", data.token);
             navigate(from, { replace: true });
           });
@@ -60,7 +59,6 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             localStorage.setItem("PF-token", data.token);
             navigate(from, { replace: true });
           });

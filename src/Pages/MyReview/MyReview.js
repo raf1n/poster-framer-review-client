@@ -50,11 +50,14 @@ const MyReview = () => {
   };
   return review.length === 0 ? (
     <div className="p-20 flex justify-center text-2xl">
-      <div>
+      <div className="text-center">
         You haven't Reviewed anything
-        <br /> Please{" "}
-        <span className="text-semibold text-3xl text-red-500">
-          <Link to="/services">Post</Link>
+        <br />
+        <span className="text-semibold ">
+          Please{" "}
+          <Link className="text-red-500 text-3xl" to="/services">
+            Post
+          </Link>
         </span>{" "}
         Review
       </div>
@@ -67,10 +70,10 @@ const MyReview = () => {
       <div className="overflow-x-auto min-h-full lg:w-[90%] mx-auto">
         <table className="min-w-full text-xs w-[40%]">
           <thead className="bg-gray-300">
-            <tr className="text-left">
+            <tr className="text-left text-base">
               <th className="p-3">Service</th>
               <th className="p-3">Review</th>
-              <th className="p-3">Issued</th>
+              <th className="p-3">Posted</th>
               <th className="p-3"></th>
             </tr>
           </thead>
@@ -78,7 +81,7 @@ const MyReview = () => {
             {review?.map((mr) => (
               <tr
                 key={mr._id}
-                className="border-b w-6 border-opacity-20 border-gray-300 bg-gray-50"
+                className="border-b w-6 border-opacity-20 border-gray-300 bg-gray-50 text-base"
               >
                 <td className="p-3">
                   <p>{mr.s_name}</p>
