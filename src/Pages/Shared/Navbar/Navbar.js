@@ -3,15 +3,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 
 const Navbar = () => {
-  const location = useLocation();
-  const from = location?.state?.from?.pathname;
   const navigate = useNavigate();
   const { user, logOut, setUser } = useContext(AuthContext);
   const handleLogOut = () => {
     logOut()
       .then(() => {
         setUser(null);
-        navigate(from, { replace: true });
+        navigate("/");
       })
       .catch((err) => console.error(err.message));
   };

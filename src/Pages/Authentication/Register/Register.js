@@ -2,8 +2,13 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
-
+import { useTitle } from "react-use";
 const Register = () => {
+  const HandleTitle = () => {
+    useTitle("PF || Register");
+    return null;
+  };
+  HandleTitle();
   const { setUser, createUser, googleLogin, userProfileUpdate } =
     useContext(AuthContext);
   const [error, setError] = useState("");

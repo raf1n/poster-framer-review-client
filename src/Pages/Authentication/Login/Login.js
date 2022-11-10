@@ -1,8 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
-
+import { useTitle } from "react-use";
 const Login = () => {
+  const HandleTitle = () => {
+    useTitle("PF || Login");
+    return null;
+  };
+  HandleTitle();
   const { setLoading, login, googleLogin } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
