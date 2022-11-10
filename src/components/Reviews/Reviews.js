@@ -76,7 +76,14 @@ const Reviews = ({ service }) => {
                 <td className="px-3 py-2 flex items-center gap-2">
                   <div className="avatar">
                     <div className="w-10 mask mask-squircle">
-                      <img src={review?.r_img} alt="" />
+                      <img
+                        src={
+                          review?.r_img
+                            ? review?.r_img
+                            : "https://image.shutterstock.com/image-vector/person-icon-flat-symbol-design-260nw-424612276.jpg"
+                        }
+                        alt=""
+                      />
                     </div>
                   </div>
                   <p>{review?.r_name}</p>
