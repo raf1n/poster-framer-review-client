@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, setUser } = useContext(AuthContext);
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        setUser(null);
+      })
       .catch((err) => console.error(err.message));
   };
   return (
@@ -126,12 +128,14 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        {user ? (
+        {user && user?.uid && user?.email ? (
           <>
-            <h1 className="text-sm mr-0 lg:mr-2">Hello, {user?.displayName}</h1>
-            <Link onClick={handleLogOut} className="btn btn-xs md:btn-sm">
+            <h1 className="text-sm mr-2">
+              Hello, <span className="text-red-700">{user?.displayName}</span>
+            </h1>
+            <button onClick={handleLogOut} className="btn btn-xs md:btn-sm">
               Log Out
-            </Link>
+            </button>
           </>
         ) : (
           <Link to="/login" className="btn btn-xs md:btn-sm">

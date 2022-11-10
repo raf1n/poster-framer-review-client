@@ -37,13 +37,17 @@ const AuthProvider = ({ children }) => {
     return updateProfile(auth.currentUser, profile);
   };
   const logOut = () => {
+    setLoading(true);
     localStorage.removeItem("PF-token");
     return signOut(auth);
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setLoading(false);
-      setUser(currentUser);
+      if (currentUser) {
+        setLoading(false);
+        setUser(currentUser);
+        console.log(currentUser);
+      }
     });
     return () => {
       unsubscribe();

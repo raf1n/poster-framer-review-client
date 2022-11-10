@@ -62,10 +62,10 @@ const Reviews = ({ service }) => {
       <div className="overflow-x-auto">
         <table className="w-full p-6 text-xs text-left whitespace-nowrap">
           <thead>
-            <tr className="bg-gray-300">
+            <tr className="bg-gray-300 text-base">
               <th className="p-3">Name</th>
               <th className="p-3">Review</th>
-              <th className="p-3">Date</th>
+              <th className="p-3">Posted</th>
             </tr>
           </thead>
           {reviews?.map((review) => (
@@ -73,7 +73,7 @@ const Reviews = ({ service }) => {
               key={review._id}
               className="border-b bg-gray-50 border-gray-300"
             >
-              <tr>
+              <tr className="text-sm">
                 <td className="px-3 py-2 flex items-center gap-2">
                   <div className="avatar">
                     <div className="w-10 mask mask-squircle">
@@ -99,7 +99,14 @@ const Reviews = ({ service }) => {
           <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-center">
             <div className="avatar">
               <div className="w-10 mask ">
-                <img src={user?.photoURL} alt="" />
+                <img
+                  src={
+                    user?.photoURL
+                      ? user?.photoURL
+                      : "https://image.shutterstock.com/image-vector/person-icon-flat-symbol-design-260nw-424612276.jpg"
+                  }
+                  alt=""
+                />
               </div>
             </div>
             <div className="grow">
@@ -121,7 +128,7 @@ const Reviews = ({ service }) => {
           </div>
         </form>
       ) : (
-        <div className="p-4 lg:p-20 flex justify-center text-base lg:text-2xl">
+        <div className="p-4 lg:p-20 flex justify-center text-base lg:text-2xl border rounded-lg border-cyan-600 m-6 lg:py-10 shadow-lg">
           <div>
             Please{" "}
             <span className="text-semibold text-red-500">

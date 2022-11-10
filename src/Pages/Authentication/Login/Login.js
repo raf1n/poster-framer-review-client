@@ -31,7 +31,6 @@ const Login = () => {
           .then((res) => res.json())
           .then((data) => {
             localStorage.setItem("PF-token", data.token);
-            navigate(from, { replace: true });
           });
       })
       .catch((err) => {
@@ -40,6 +39,7 @@ const Login = () => {
       })
       .finally(() => {
         setLoading(false);
+        navigate(from, { replace: true });
       });
   };
   const handleGoogleLogin = () => {

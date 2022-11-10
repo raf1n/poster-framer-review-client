@@ -9,7 +9,7 @@ const Register = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location?.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -23,9 +23,9 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        setUser(result.user);
         setError("");
         updateUserProfile(name, imageURL);
-        setUser(result.user);
         toast.success("Your account have been created Successfully!", {
           duration: 4000,
           position: "top-center",
@@ -43,7 +43,6 @@ const Register = () => {
           .then((res) => res.json())
           .then((data) => {
             localStorage.setItem("PF-token", data.token);
-            form.reset();
             navigate(from, { replace: true });
           });
       })
@@ -53,7 +52,7 @@ const Register = () => {
       });
   };
   const updateUserProfile = (name, photoURL) => {
-    const profile = {
+    let profile = {
       displayName: name,
       photoURL: photoURL,
     };
