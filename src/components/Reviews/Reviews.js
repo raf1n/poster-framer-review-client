@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
+import Spinner from "../Spinner/Spinner";
 
 const Reviews = ({ service }) => {
   const [refresh, setRefresh] = useState(false);
@@ -57,7 +58,6 @@ const Reviews = ({ service }) => {
   return (
     <div className="container px-16 mx-auto p-4 text-gray-800">
       <h2 className="mb-4 text-2xl font-semibold leading-tight">Reviews</h2>
-
       <div className="overflow-x-auto">
         <table className="w-full p-6 text-xs text-left whitespace-nowrap">
           <thead>
@@ -67,36 +67,42 @@ const Reviews = ({ service }) => {
               <th className="p-3">Posted</th>
             </tr>
           </thead>
-          {reviews?.map((review) => (
-            <tbody
-              key={review._id}
-              className="border-b bg-gray-50 border-gray-300"
-            >
-              <tr className="text-sm">
-                <td className="px-3 py-2 flex items-center gap-2">
-                  <div className="avatar">
-                    <div className="w-10 mask mask-squircle">
-                      <img
-                        src={
-                          review?.r_img
-                            ? review?.r_img
-                            : "https://image.shutterstock.com/image-vector/person-icon-flat-symbol-design-260nw-424612276.jpg"
-                        }
-                        alt=""
-                      />
+          {!reviews ? (
+            <div className="m-2">
+              <Spinner></Spinner>
+            </div>
+          ) : (
+            reviews?.map((review) => (
+              <tbody
+                key={review._id}
+                className="border-b bg-gray-50 border-gray-300"
+              >
+                <tr className="text-sm">
+                  <td className="px-3 py-2 flex items-center gap-2">
+                    <div className="avatar">
+                      <div className="w-10 mask mask-squircle">
+                        <img
+                          src={
+                            review?.r_img
+                              ? review?.r_img
+                              : "https://image.shutterstock.com/image-vector/person-icon-flat-symbol-design-260nw-424612276.jpg"
+                          }
+                          alt=""
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <p>{review?.r_name}</p>
-                </td>
-                <td className="px-3 py-2">
-                  <p>{review?.review}</p>
-                </td>
-                <td className="px-3 py-2">
-                  <p>{review?.date.slice(0, 19)}</p>
-                </td>
-              </tr>
-            </tbody>
-          ))}
+                    <p>{review?.r_name}</p>
+                  </td>
+                  <td className="px-3 py-2">
+                    <p>{review?.review}</p>
+                  </td>
+                  <td className="px-3 py-2">
+                    <p>{review?.date.slice(0, 19)}</p>
+                  </td>
+                </tr>
+              </tbody>
+            ))
+          )}
         </table>
       </div>
 

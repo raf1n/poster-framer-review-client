@@ -1,4 +1,5 @@
 import React from "react";
+
 import { PhotoProvider, PhotoView } from "react-photo-view";
 const ServiceDetail = ({ service }) => {
   const { name, img, price, description } = service;

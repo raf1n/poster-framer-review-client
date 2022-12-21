@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 
 const Navbar = () => {
@@ -9,6 +10,7 @@ const Navbar = () => {
     logOut()
       .then(() => {
         setUser(null);
+        toast.success("You have logged out succesfully");
         navigate("/");
       })
       .catch((err) => console.error(err.message));

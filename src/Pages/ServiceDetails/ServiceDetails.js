@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useTitle } from "react-use";
 import Reviews from "../../components/Reviews/Reviews";
 import ServiceDetail from "../../components/ServiceDetail/ServiceDetail";
+import Spinner from "../../components/Spinner/Spinner";
 const ServiceDetails = () => {
   const HandleTitle = () => {
     useTitle("PF || Service Details");
@@ -20,9 +21,14 @@ const ServiceDetails = () => {
         }
       });
   }, [id]);
+
   return (
     <div>
-      <ServiceDetail key={service._id} service={service}></ServiceDetail>
+      {service === {} ? (
+        <Spinner></Spinner>
+      ) : (
+        <ServiceDetail key={service._id} service={service}></ServiceDetail>
+      )}
       <Reviews key={0} service={service}></Reviews>
     </div>
   );

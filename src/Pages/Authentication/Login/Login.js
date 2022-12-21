@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 import { useTitle } from "react-use";
+import { toast } from "react-hot-toast";
 const Login = () => {
   const HandleTitle = () => {
     useTitle("PF || Login");
@@ -23,6 +24,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setError("");
+        toast.success("You have logged in succesfully");
         const currentUser = {
           email: user.email,
         };
@@ -51,6 +53,7 @@ const Login = () => {
     googleLogin()
       .then((result) => {
         const user = result.user;
+        toast.success("You have logged in succesfully");
         setError("");
         const currentUser = {
           email: user.email,
